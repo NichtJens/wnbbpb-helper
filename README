@@ -1,11 +1,88 @@
 Repository for some small helpers to build "The Battle for Wesnoth" for the BlackBerry Playbook.
 
-Following this manual:
-https://github.com/asimonov-rim/wesnoth/issues/1
+Please check out the manual at [1]!
+
+
+
+
+Steps that worked for me:
+
+1. Clone this repository into the workspace you want to build Wesnoth in.
+
+2. cd into the new subdirectory (wnbbpb-helper) and run:
+./checkout.sh
+This will clone all other necessary repos.
+
+3. cd back into wnbbpb-helper and run
+./getmissingfiles.sh
+This will get you some missing files as mentioned in [1]. It adapts them to your installation and move them in to right spot. As this step needs $QNX_TARGET to be set, make sure you sourced bbndk-env.sh from the NDK, e.g. in you .bashrc.
+
+4. pango.patch needs to be applied to the pango directory in you workspace. It will adapt pango-utils.c to return the correct paths. This step is according to the Wesnoth port in [2], as I could not figure out how to run pango-querymodules on the PB.
+
+5. cd back into wnbbpb-helper and run
+./loop-build.sh
+This will loop over all projects that are not build from inside the NDK IDE and run the respective build_for_playbook.sh. It will stop if it encounters an error - the notes section below has workarounds the problems I had building it, so please have a look there.
+
+6. cd back into wnbbpb-helper and run
+./pangomodules-file.sh > ../install/etc/pango/pango.modules
+This will get the content from pango-querymodules of the host, convert it to the PB version and pipe it to the right file.
+
+7. cd back into wnbbpb-helper and run
+./pangomodules-assests.sh
+This will output additional assets that need to be added to the according part in:
+wesnoth/projectfiles/qnx/bar-descriptor.xml
+(Again, this step is probably not the direct way to achieve the right thing, cf. 4.)
+
+8. Open the NDK IDE and import the workspace directory via General->Existing...
+In the list it presents you uncheck all projects starting with org.wesnoth.
+
+You should be able to build all projects in the IDE. But - again - make sure to check the notes section for workarounds for potential problems. Make sure you build in the order given in [1], as the internal references are not set, so e.g. the TouchControlOverlay lib has to be build before SDL by hand ...
+
+
+
+NOTES:
+
+SDL:
+I had problems setting up the workspace and build directories as explained in [1], I found the one directory solution explained above much simpler to get into working condition. It has one caveat, though. If at some point the SDL12 library is not found, do this in the workspace directory and then rebuild:
+mv SDL SDL12
+ln -s SDL12 SDL
+
+
+Pixman:
+I encountered the libtool problem solved in [4], so try to run this inside the pixman directory:
+mv ltmain.sh ltmain.sh.old
+autoreconf
+
+
+Pango:
+I needed to install gtk-doc, in Ubuntu this is done via:
+sudo apt-get install gtk-doc-tools
+
+Then - again - a libtool problem, this time as in [5]. Run this in the pango directory:
+autoreconf --verbose --force --install --symlink
+
+
+Wesnoth:
+It seems there is a typo in the build_for_playbook.sh for Wesnoth itself. I guess $(PWD) is taken from a Makefile where this is correct syntax, but is has to be $PWD or ${PWD} in a bash script.
+You can run:
+./correct-wn-bfpb.sh
+... from inside the wnbbpb-helper directory, or remove the braces by hand.
+
+
+Assets in /wesnoth/projectfiles/qnx/bar-descriptor.xml
+You should edit the bar-descriptor.xml to reflect where your workspace is, easiest is to compare with step 7 above.
+
+I had to change each occurence of libpixman according to:
+libpixman-1.so.0 -> libpixman-1.so.24
+
+
+
+
 
 References:
-https://github.com/blackberry
-https://github.com/asimonov-rim
-
-
+[1] https://github.com/asimonov-rim/wesnoth/issues/1
+[2] https://github.com/blackberry
+[3] https://github.com/asimonov-rim
+[4] http://errorjournal.blogspot.de/2008/11/x-tagcc-command-not-found.html
+[5] http://code.google.com/p/vtg/issues/detail?id=128
 
