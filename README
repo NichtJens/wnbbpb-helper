@@ -15,9 +15,9 @@ This will clone all other necessary repos.
 
 3. cd back into wnbbpb-helper and run
 ./getmissingfiles.sh
-This will get you some missing files as mentioned in [1]. It adapts them to your installation and moves them in to right spot. As this step needs $QNX_TARGET to be set, make sure you sourced bbndk-env.sh from the NDK, e.g. in you .bashrc.
+This will get you some missing files as mentioned in [1]. It adapts them to your installation and moves them into right spot. As this step needs $QNX_TARGET to be set, make sure you sourced bbndk-env.sh from the NDK, e.g. in your .bashrc.
 
-4. pango.patch needs to be applied to the pango directory in you workspace. It will adapt pango-utils.c to return the correct paths. This step is according to the Wesnoth port in [2], as I could not figure out how to run pango-querymodules on the PB.
+4. pango.patch needs to be applied to the pango directory in your workspace. It will adapt pango-utils.c to return the correct paths. This step is according to the Wesnoth port in [2], as I could not figure out how to run pango-querymodules on the PB.
 
 5. cd back into wnbbpb-helper and run
 ./loop-build.sh
