@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<emulation version="1">
+<touchscreen x="0" y="0" width="1024" height="600"/>
+
+<!--<key x="550" y="550" width="48" height="48" sym="275" scancode="275">-->
+<!--<label x="0" y="0" width="48" height="48" image="bbicon.png"/>-->
+<!--</key>-->
+
+</emulation>
