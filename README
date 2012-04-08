@@ -62,11 +62,12 @@ Then - again - a libtool problem, this time as in [5]. Run this in the pango dir
 autoreconf --verbose --force --install --symlink
 
 
-Wesnoth:
-It seems there is a typo in the build_for_playbook.sh for Wesnoth itself. I guess $(PWD) is taken from a Makefile where this is correct syntax, but is has to be $PWD or ${PWD} in a bash script.
-You can run:
-./correct-wn-bfpb.sh
-... from inside the wnbbpb-helper directory, or remove the braces by hand.
+This part is taken care of by now...
+# Wesnoth:
+# It seems there is a typo in the build_for_playbook.sh for Wesnoth itself. I guess $(PWD) is taken from a Makefile where this is correct syntax, but is has to be $PWD or ${PWD} in a bash script.
+# You can run:
+# ./correct-wn-bfpb.sh
+# ... from inside the wnbbpb-helper directory, or remove the braces by hand.
 
 
 Assets in /wesnoth/projectfiles/qnx/bar-descriptor.xml
