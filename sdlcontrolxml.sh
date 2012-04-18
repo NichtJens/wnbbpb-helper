@@ -1,17 +1,23 @@
 #!/bin/bash
 
-output="sdl-controls.xml.test"
+output="sdl-controls.xml"
+
+
+dirbutton_width=50
+
+screen_width=1024
+screen_height=600
+topbar_height=26
+panel_width=142
+
+main_width=$screen_width-$panel_width
+main_height=$screen_height-$topbar_height
 
 scancode_up=273
 scancode_down=274
 scancode_right=275
 scancode_left=276
 scancode_esc=27
-
-screen_width=1024
-screen_height=600
-dirbutton_width=20
-topbar_height=26
 
 
 
@@ -75,17 +81,17 @@ rm $output
 addheader
 
 addcomment direction buttons
-addcomment up;            addkey    20  26 842  20 $scancode_up
-addcomment down;          addkey    20 580 842  20 $scancode_down
-addcomment right;         addkey   862  26  20 574 $scancode_right
-addcomment left;          addkey     0  26  20 574 $scancode_left
+addcomment up;            addkey   $dirbutton_width               $topbar_height                    $main_width-$dirbutton_width-$dirbutton_width   $dirbutton_width                $scancode_up
+addcomment down;          addkey   $dirbutton_width               $screen_height-$dirbutton_width   $main_width-$dirbutton_width-$dirbutton_width   $dirbutton_width                $scancode_down
+addcomment right;         addkey   $main_width-$dirbutton_width   $topbar_height                    $dirbutton_width                                $screen_height-$topbar_height   $scancode_right
+addcomment left;          addkey   0                              $topbar_height                    $dirbutton_width                                $screen_height-$topbar_height   $scancode_left
 
 addcomment touchareas
-addcomment top bar;       addtouch   0   0 882  26
-addcomment main window;   addtouch  20  46 842 534
-addcomment right boxes;   addtouch 882  26 142 574
+addcomment top bar;       addtouch 0                              0                                 $main_width                                     $topbar_height
+addcomment main window;   addtouch $dirbutton_width               $topbar_height+$dirbutton_width   $main_width-$dirbutton_width-$dirbutton_width   $main_height-$dirbutton_width-$dirbutton_width
+addcomment right boxes;   addtouch $main_width                    $topbar_height                    $panel_width                                    $main_height
 
-addcomment escape button; addkey   882   0 142  26 $scancode_esc
+addcomment escape button; addkey   $main_width                    0                                 $panel_width                                    $topbar_height                  $scancode_esc
 
 addfooter
 

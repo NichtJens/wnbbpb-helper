@@ -1,55 +1,21 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <emulation version="1">
-
-
-
 <!-- direction buttons -->
-
 <!-- up -->
-<key x="20" y="26" width="842" height="20" sym="273" scancode="273"/>
-
+<key x="50" y="26" width="782" height="50" sym="273" scancode="273"/>
 <!-- down -->
-<key x="20" y="580" width="842" height="20" sym="274" scancode="274"/>
-
+<key x="50" y="550" width="782" height="50" sym="274" scancode="274"/>
 <!-- right -->
-<key x="862" y="26" width="20" height="574" sym="275" scancode="275"/>
-
+<key x="832" y="26" width="50" height="574" sym="275" scancode="275"/>
 <!-- left -->
-<key x="0" y="26" width="20" height="574" sym="276" scancode="276"/>
-
-
-
-
-
+<key x="0" y="26" width="50" height="574" sym="276" scancode="276"/>
+<!-- touchareas -->
 <!-- top bar -->
-<!--<touchscreen x="0" y="0" width="1024" height="26"/>-->
 <touchscreen x="0" y="0" width="882" height="26"/>
-
 <!-- main window -->
-<!--<touchscreen x="0" y="26" width="882" height="574"/>-->
-<touchscreen x="20" y="46" width="842" height="534"/>
-
+<touchscreen x="50" y="76" width="782" height="474"/>
 <!-- right boxes -->
 <touchscreen x="882" y="26" width="142" height="574"/>
-
-
-
-
-
 <!-- escape button -->
 <key x="882" y="0" width="142" height="26" sym="27" scancode="27"/>
-
-
-
-
-
-<!--<key x="550" y="550" width="48" height="48" sym="275" scancode="275">-->
-<!--<label x="0" y="0" width="48" height="48" image="bbicon.png"/>-->
-<!--</key>-->
-
-
-
 </emulation>
-
-
-
